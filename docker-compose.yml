@@ -4,7 +4,7 @@ services:
         image: mariadb:10.1
         restart: always
         environment: 
-            - MYSQL_ROOT_PASSWORD=Bingcom0802!
+            - MYSQL_ROOT_PASSWORD={PASSWD}
         volumes: 
             - /travlan/db/data:/var/lib/mysql
             - /travlan/db/conf.d:/etc/mysql/conf.d
