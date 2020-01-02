@@ -1,0 +1,33 @@
+version: '3'
+services:
+    db:
+        image: mariadb:10.1
+        restart: always
+        environment: 
+            - MYSQL_ROOT_PASSWORD=Bingcom0802!
+        volumes: 
+            - /travlan/db/data:/var/lib/mysql
+            - /travlan/db/conf.d:/etc/mysql/conf.d
+        ports: 
+            - 33061:3306
+
+    tomcat8: &tomcat
+        image: tomcat:8.5-jdk8-openjdk
+        expose: 
+            - 8000
+        environment:
+            - JAVA_OPTS=-Dspring.profiles.active=docker -Dfile.encoding=utf-8
+        volumes: 
+            - /travlan/server/webapps:/usr/local/tomcat/webapps
+            - /travlan/server/config/tomcat:/usr/local/tomcat/conf
+            - /travlan/server/logs/tomcat:/usr/local/tomcat/logs
+            
+    nginx:
+        image: nginx:stable
+        volumes: 
+            - /travlan/server/config/nginx:/etc/nginx
+        ports:
+            - 80:80
+        
+            
+    
