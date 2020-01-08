@@ -21,13 +21,13 @@ services:
             - /travlan/server/webapps:/usr/local/tomcat/webapps
             - /travlan/server/config/tomcat:/usr/local/tomcat/conf
             - /travlan/server/logs/tomcat:/usr/local/tomcat/logs
-            
+            - /data:/usr/local/tomcat/data
+
     nginx:
         image: nginx:stable
         volumes: 
             - /travlan/server/config/nginx:/etc/nginx
+            - /data:/data
         ports:
             - 80:80
-        
-            
-    
+            - 443:443
